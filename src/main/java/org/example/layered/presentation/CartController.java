@@ -19,7 +19,7 @@ public class CartController {
 
     @PostMapping("/carts")
     public ResponseEntity<Long> addProduct(@RequestBody CartDto cart) {
-        final Long cartId = cartAddService.addProduct(cart.cartId(), cart.productId(), cart.optionId(), cart.quantity());
+        final Long cartId = cartAddService.addLineItem(cart.cartId(), cart.productId(), cart.optionId(), cart.quantity());
         return ResponseEntity.created(URI.create("/carts/" + cartId)).build();
     }
 }

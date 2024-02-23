@@ -48,10 +48,6 @@ public class LineItem {
         this.quantity = quantity;
     }
 
-    public boolean hasSameProductOption(Long productId, Long optionId) {
-        return this.productId.equals(productId) && this.optionId.equals(optionId);
-    }
-
     public void addQuantity(int quantity) {
         if (quantity <= 0) {
             throw new IllegalArgumentException("quantity must be greater than 0");
@@ -65,5 +61,9 @@ public class LineItem {
 
     public Integer getQuantity() {
         return quantity;
+    }
+
+    public boolean hasSameProductOption(LineItem lineItem) {
+        return this.productId.equals(lineItem.productId) && this.optionId.equals(lineItem.optionId);
     }
 }

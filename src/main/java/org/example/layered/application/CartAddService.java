@@ -1,6 +1,8 @@
 package org.example.layered.application;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.example.layered.domain.Cart;
+import org.example.layered.domain.LineItem;
 import org.example.layered.infra.CartRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,20 +16,20 @@ public class CartAddService {
     }
 
     @Transactional
-    public Long addProduct(Long cartId, Long productId, Long optionId, Integer quantity) {
+    public Long addLineItem(Long cartId, Long productId, Long optionId, Integer quantity) {
         if (cartId == null) {
-            final Cart savedCart = cartRepository.save(new Cart(productId, optionId, quantity));
+            Cart cart = new Cart();
+            LineItem lineItem = new LineItem(productId, optionId, quantity);
+            cart.addLineItem(lineItem);
+
+            Cart savedCart = cartRepository.save(cart);
             return savedCart.getId();
         }
 
         final Cart cart = cartRepository.findById(cartId)
-                .map(it -> {
-                    it.addProduct(productId, optionId, quantity);
-                    return it;
-                })
-                .orElseGet(() -> new Cart(productId, optionId, quantity));
-
-        final Cart savedCart = cartRepository.save(cart);
-        return savedCart.getId();
+                .orElseThrow(()-> new IllegalArgumentException("cart not found"));
+        LineItem lineItem = new LineItem(productId, optionId, quantity);
+        cart.addLineItem(lineItem);
+        return cart.getId();
     }
 }
