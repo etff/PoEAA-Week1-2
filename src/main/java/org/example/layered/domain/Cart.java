@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -54,6 +55,6 @@ public class Cart {
     }
 
     public List<LineItem> getCartItems() {
-        return lineItems;
+        return Collections.unmodifiableList(lineItems);
     }
 }
