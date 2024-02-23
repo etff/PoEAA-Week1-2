@@ -1,7 +1,7 @@
 package org.example.layered.presentation;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.layered.application.CartAddService;
+import org.example.layered.application.AddProductToCartService;
 import org.example.layered.presentation.dto.CartDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ class CartControllerTest {
     private ObjectMapper objectMapper;
 
     @MockBean
-    private CartAddService cartAddService;
+    private AddProductToCartService cartAddService;
 
     @Test
     void addProductToCartShouldReturnCreatedStatus() throws Exception {

@@ -19,13 +19,13 @@ import static org.mockito.Mockito.when;
 
 
 @ExtendWith(MockitoExtension.class)
-class CartAddServiceTest {
+class cartAddServiceTest {
 
     @Mock
     private CartRepository cartRepository;
 
     @InjectMocks
-    private CartAddService cartAddService;
+    private AddProductToCartService cartAddService;
 
     @Test
     void addLineItem_cartIdIsNull() {

@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class CartAddService {
+public class AddProductToCartService {
     private final CartRepository cartRepository;
 
-    public CartAddService(CartRepository cartRepository) {
+    public AddProductToCartService(CartRepository cartRepository) {
         this.cartRepository = cartRepository;
     }
 

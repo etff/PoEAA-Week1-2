@@ -1,6 +1,6 @@
 package org.example.layered.presentation;
 
-import org.example.layered.application.CartAddService;
+import org.example.layered.application.AddProductToCartService;
 import org.example.layered.presentation.dto.CartDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,9 +11,9 @@ import java.net.URI;
 
 @RestController
 public class CartController {
-    private final CartAddService cartAddService;
+    private final AddProductToCartService cartAddService;
 
-    public CartController(CartAddService cartAddService) {
+    public CartController(AddProductToCartService cartAddService) {
         this.cartAddService = cartAddService;
     }
 
