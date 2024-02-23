@@ -18,42 +18,42 @@ public class Cart {
     private Long id;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
-    private final List<CartItem> cartItems = new ArrayList<>();
+    private final List<LineItem> lineItems = new ArrayList<>();
 
     protected Cart() {
     }
 
-    public Cart(List<CartItem> cartItems) {
+    public Cart(List<LineItem> lineItems) {
         this.id = null;
-        this.cartItems.addAll(cartItems);
-        cartItems.forEach(it -> it.setCartItem(this));
+        this.lineItems.addAll(lineItems);
+        lineItems.forEach(it -> it.setCartItem(this));
     }
 
     public Cart(Long productId, Long optionId, int quantity) {
         this.id = null;
-        addCartItem(new CartItem(productId, optionId, quantity));
+        addCartItem(new LineItem(productId, optionId, quantity));
     }
 
     public void addProduct(Long productId, Long optionId, int quantity) {
-        cartItems.stream()
+        lineItems.stream()
                 .filter(it -> it.hasSameProductOption(productId, optionId))
                 .findFirst()
                 .ifPresentOrElse(
                         it -> it.addQuantity(quantity),
-                        () -> cartItems.add(new CartItem(productId, optionId, quantity))
+                        () -> lineItems.add(new LineItem(productId, optionId, quantity))
                 );
     }
 
-    public void addCartItem(CartItem cartItem) {
-        cartItems.add(cartItem);
-        cartItem.setCartItem(this);
+    public void addCartItem(LineItem lineItem) {
+        lineItems.add(lineItem);
+        lineItem.setCartItem(this);
     }
 
     public Long getId() {
         return id;
     }
 
-    public List<CartItem> getCartItems() {
-        return cartItems;
+    public List<LineItem> getCartItems() {
+        return lineItems;
     }
 }

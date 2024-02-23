@@ -10,7 +10,7 @@ import jakarta.persistence.ManyToOne;
 import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
-public class CartItem {
+public class LineItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,14 +22,14 @@ public class CartItem {
     @JoinColumn(name = "cart_id", nullable = false)
     private Cart cart;
 
-    protected CartItem() {
+    protected LineItem() {
     }
 
-    public CartItem(Long productId, Long optionId, int quantity) {
+    public LineItem(Long productId, Long optionId, int quantity) {
         this(null, productId, optionId, quantity);
     }
 
-    public CartItem(Long id, Long productId, Long optionId, int quantity) {
+    public LineItem(Long id, Long productId, Long optionId, int quantity) {
         if (productId == null) {
             throw new IllegalArgumentException("productId is required");
         }

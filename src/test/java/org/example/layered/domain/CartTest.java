@@ -25,7 +25,7 @@ class CartTest {
 
     @Test
     void addProductWithExistCartItems() {
-        final Cart cart = new Cart(List.of(new CartItem(1L, 1L, 1)));
+        final Cart cart = new Cart(List.of(new LineItem(1L, 1L, 1)));
         final Long productId = 1L;
         final Long optionId = 2L;
         final int quantity = 1;
