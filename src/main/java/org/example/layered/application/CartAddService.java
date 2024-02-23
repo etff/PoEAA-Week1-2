@@ -1,6 +1,5 @@
 package org.example.layered.application;
 
-import jakarta.persistence.EntityNotFoundException;
 import org.example.layered.domain.Cart;
 import org.example.layered.domain.LineItem;
 import org.example.layered.infra.CartRepository;
