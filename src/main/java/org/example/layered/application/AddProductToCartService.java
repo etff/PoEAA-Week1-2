@@ -15,20 +15,23 @@ public class AddProductToCartService {
     }
 
     @Transactional
-    public Long addLineItem(Long cartId, Long productId, Long optionId, Integer quantity) {
-        if (cartId == null) {
-            Cart cart = new Cart();
-            LineItem lineItem = new LineItem(productId, optionId, quantity);
-            cart.addProduct(lineItem);
-
-            Cart savedCart = cartRepository.save(cart);
-            return savedCart.getId();
-        }
-
-        final Cart cart = cartRepository.findById(cartId)
-                .orElseThrow(()-> new IllegalArgumentException("cart not found"));
+    public Long addProduct(Long productId, Long optionId, Integer quantity) {
+        Cart cart = new Cart();
         LineItem lineItem = new LineItem(productId, optionId, quantity);
         cart.addProduct(lineItem);
+
+        Cart savedCart = cartRepository.save(cart);
+        return savedCart.getId();
+    }
+
+    @Transactional
+    public Long updateProduct(Long cartId, Long productId, Long optionId, Integer quantity) {
+        Cart cart = cartRepository.findById(cartId)
+                .orElseThrow(() -> new IllegalArgumentException("cart not found"));
+        LineItem lineItem = new LineItem(productId, optionId, quantity);
+
+        cart.addProduct(lineItem);
+
         return cart.getId();
     }
 }

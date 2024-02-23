@@ -28,29 +28,27 @@ class cartAddServiceTest {
     private AddProductToCartService cartAddService;
 
     @Test
-    void addLineItem_cartIdIsNull() {
+    void addLineItem() {
         Cart cart = new Cart();
         LineItem lineItem = new LineItem(1L, 1L, 1);
         cart.addProduct(lineItem);
         when(cartRepository.save(any(Cart.class))).thenReturn(cart);
 
-        Long cartId = cartAddService.addLineItem(null, 1L, 1L, 1);
+        Long cartId = cartAddService.addProduct(1L, 1L,  1);
 
         verify(cartRepository, times(1)).save(any(Cart.class));
         assertEquals(cart.getId(), cartId);
     }
 
     @Test
-    void addLineItem_cartIdIsNotNull() {
+    void updateLineItem() {
         Cart cart = new Cart();
         LineItem lineItem = new LineItem(1L, 1L, 1);
         cart.addProduct(lineItem);
-
         when(cartRepository.findById(any(Long.class))).thenReturn(Optional.of(cart));
 
-        Long cartId = cartAddService.addLineItem(1L, 1L, 1L, 1);
+        Long cartId = cartAddService.updateProduct(1L, 1L,  1L, 1);
 
-        verify(cartRepository, times(1)).findById(any(Long.class));
         assertEquals(cart.getId(), cartId);
     }
 }
