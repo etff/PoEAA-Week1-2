@@ -24,13 +24,13 @@ class LineItemTest {
     @Test
     void testHasSameProductOptionWithMatchingIds() {
         LineItem lineItem = new LineItem(1L, 1L, 1);
-        assertTrue(lineItem.hasSameProductOption(1L, 1L));
+        assertTrue(lineItem.hasSameProductOption(new LineItem(1L, 1L, 1)));
     }
 
     @Test
     void testHasSameProductOptionWithNonMatchingIds() {
         LineItem lineItem = new LineItem(1L, 1L, 1);
-        assertFalse(lineItem.hasSameProductOption(2L, 2L));
+        assertFalse(lineItem.hasSameProductOption(new LineItem(2L, 1L, 1)));
     }
 
     @Test

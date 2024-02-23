@@ -32,7 +32,7 @@ class CartControllerTest {
         // 가정 설정
         final CartDto cartDto = new CartDto(1L, 2L, 3L, 10);
         final Long expectedCartId = 1L;
-        given(cartAddService.addProduct(cartDto.cartId(), cartDto.productId(), cartDto.optionId(), cartDto.quantity()))
+        given(cartAddService.addLineItem(cartDto.cartId(), cartDto.productId(), cartDto.optionId(), cartDto.quantity()))
                 .willReturn(expectedCartId);
 
         // 실행 & 검증

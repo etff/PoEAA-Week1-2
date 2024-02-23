@@ -1,37 +1,35 @@
 package org.example.layered.domain;
-
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class CartTest {
 
     @Test
-    void addProductWithEmptyCartItems() {
-        // given
-        final Cart cart = new Cart(1L, 1L, 1);
-        final Long productId = 1L;
-        final Long optionId = 1L;
-        final int quantity = 1;
+    void addLineItem_cartIsEmpty() {
+        // Arrange
+        Cart cart = new Cart();
+        LineItem lineItem = new LineItem(1L, 1L, 1);
 
-        // when
-        cart.addProduct(productId, optionId, quantity);
+        // Act
+        cart.addLineItem(lineItem);
 
-        // then
-        assertEquals(cart.getCartItems().size(), 1);
+        // Assert
+        assertEquals(1, cart.getCartItems().size());
+        assertEquals(lineItem, cart.getCartItems().get(0));
     }
 
     @Test
-    void addProductWithExistCartItems() {
-        final Cart cart = new Cart(List.of(new LineItem(1L, 1L, 1)));
-        final Long productId = 1L;
-        final Long optionId = 2L;
-        final int quantity = 1;
+    void addLineItem_cartHasSameProductOption() {
+        Cart cart = new Cart();
+        LineItem lineItem1 = new LineItem(1L, 1L, 1);
+        LineItem lineItem2 = new LineItem(1L, 1L, 2);
 
-        cart.addProduct(productId, optionId, quantity);
+        cart.addLineItem(lineItem1);
+        cart.addLineItem(lineItem2);
 
-        assertEquals(cart.getCartItems().size(), 2);
+        assertEquals(1, cart.getCartItems().size());
+        assertEquals(3, cart.getCartItems().get(0).getQuantity());
     }
 }
