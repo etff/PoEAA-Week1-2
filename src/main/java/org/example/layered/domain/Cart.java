@@ -37,7 +37,7 @@ public class Cart {
         return Collections.unmodifiableList(lineItems);
     }
 
-    public void addLineItem(LineItem lineItem) {
+    public void addProduct(LineItem lineItem) {
         if (lineItems.isEmpty()) {
             setLineItems(lineItem);
             return;

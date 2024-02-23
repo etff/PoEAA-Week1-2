@@ -19,7 +19,7 @@ public class AddProductToCartService {
         if (cartId == null) {
             Cart cart = new Cart();
             LineItem lineItem = new LineItem(productId, optionId, quantity);
-            cart.addLineItem(lineItem);
+            cart.addProduct(lineItem);
 
             Cart savedCart = cartRepository.save(cart);
             return savedCart.getId();
@@ -28,7 +28,7 @@ public class AddProductToCartService {
         final Cart cart = cartRepository.findById(cartId)
                 .orElseThrow(()-> new IllegalArgumentException("cart not found"));
         LineItem lineItem = new LineItem(productId, optionId, quantity);
-        cart.addLineItem(lineItem);
+        cart.addProduct(lineItem);
         return cart.getId();
     }
 }

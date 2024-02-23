@@ -31,7 +31,7 @@ class cartAddServiceTest {
     void addLineItem_cartIdIsNull() {
         Cart cart = new Cart();
         LineItem lineItem = new LineItem(1L, 1L, 1);
-        cart.addLineItem(lineItem);
+        cart.addProduct(lineItem);
         when(cartRepository.save(any(Cart.class))).thenReturn(cart);
 
         Long cartId = cartAddService.addLineItem(null, 1L, 1L, 1);
@@ -44,7 +44,7 @@ class cartAddServiceTest {
     void addLineItem_cartIdIsNotNull() {
         Cart cart = new Cart();
         LineItem lineItem = new LineItem(1L, 1L, 1);
-        cart.addLineItem(lineItem);
+        cart.addProduct(lineItem);
 
         when(cartRepository.findById(any(Long.class))).thenReturn(Optional.of(cart));
 

@@ -13,7 +13,7 @@ class CartTest {
         LineItem lineItem = new LineItem(1L, 1L, 1);
 
         // Act
-        cart.addLineItem(lineItem);
+        cart.addProduct(lineItem);
 
         // Assert
         assertEquals(1, cart.getCartItems().size());
@@ -26,8 +26,8 @@ class CartTest {
         LineItem lineItem1 = new LineItem(1L, 1L, 1);
         LineItem lineItem2 = new LineItem(1L, 1L, 2);
 
-        cart.addLineItem(lineItem1);
-        cart.addLineItem(lineItem2);
+        cart.addProduct(lineItem1);
+        cart.addProduct(lineItem2);
 
         assertEquals(1, cart.getCartItems().size());
         assertEquals(3, cart.getCartItems().get(0).getQuantity());
