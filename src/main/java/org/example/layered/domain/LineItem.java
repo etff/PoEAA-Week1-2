@@ -10,7 +10,7 @@ import jakarta.persistence.ManyToOne;
 import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
-public class CartItem {
+public class LineItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,14 +22,14 @@ public class CartItem {
     @JoinColumn(name = "cart_id", nullable = false)
     private Cart cart;
 
-    protected CartItem() {
+    protected LineItem() {
     }
 
-    public CartItem(Long productId, Long optionId, int quantity) {
+    public LineItem(Long productId, Long optionId, int quantity) {
         this(null, productId, optionId, quantity);
     }
 
-    public CartItem(Long id, Long productId, Long optionId, int quantity) {
+    public LineItem(Long id, Long productId, Long optionId, int quantity) {
         if (productId == null) {
             throw new IllegalArgumentException("productId is required");
         }
@@ -48,10 +48,6 @@ public class CartItem {
         this.quantity = quantity;
     }
 
-    public boolean hasSameProductOption(Long productId, Long optionId) {
-        return this.productId.equals(productId) && this.optionId.equals(optionId);
-    }
-
     public void addQuantity(int quantity) {
         if (quantity <= 0) {
             throw new IllegalArgumentException("quantity must be greater than 0");
@@ -65,5 +61,9 @@ public class CartItem {
 
     public Integer getQuantity() {
         return quantity;
+    }
+
+    public boolean hasSameProductOption(LineItem lineItem) {
+        return this.productId.equals(lineItem.productId) && this.optionId.equals(lineItem.optionId);
     }
 }

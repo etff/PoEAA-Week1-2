@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -18,42 +19,36 @@ public class Cart {
     private Long id;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
-    private final List<CartItem> cartItems = new ArrayList<>();
+    private final List<LineItem> lineItems = new ArrayList<>();
 
-    protected Cart() {
+    public Cart() {
     }
 
-    public Cart(List<CartItem> cartItems) {
-        this.id = null;
-        this.cartItems.addAll(cartItems);
-        cartItems.forEach(it -> it.setCartItem(this));
-    }
-
-    public Cart(Long productId, Long optionId, int quantity) {
-        this.id = null;
-        addCartItem(new CartItem(productId, optionId, quantity));
-    }
-
-    public void addProduct(Long productId, Long optionId, int quantity) {
-        cartItems.stream()
-                .filter(it -> it.hasSameProductOption(productId, optionId))
-                .findFirst()
-                .ifPresentOrElse(
-                        it -> it.addQuantity(quantity),
-                        () -> cartItems.add(new CartItem(productId, optionId, quantity))
-                );
-    }
-
-    public void addCartItem(CartItem cartItem) {
-        cartItems.add(cartItem);
-        cartItem.setCartItem(this);
+    public void setLineItems(LineItem lineItem) {
+        lineItems.add(lineItem);
+        lineItem.setCartItem(this);
     }
 
     public Long getId() {
         return id;
     }
 
-    public List<CartItem> getCartItems() {
-        return cartItems;
+    public List<LineItem> getCartItems() {
+        return Collections.unmodifiableList(lineItems);
+    }
+
+    public void addProduct(LineItem lineItem) {
+        if (lineItems.isEmpty()) {
+            setLineItems(lineItem);
+            return;
+        }
+
+        for (LineItem item : lineItems) {
+            if (item.hasSameProductOption(lineItem)) {
+                item.addQuantity(lineItem.getQuantity());
+                return;
+            }
+            setLineItems(lineItem);
+        }
     }
 }

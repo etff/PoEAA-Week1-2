@@ -1,6 +1,6 @@
 package org.example.layered.presentation.dto;
 
-public record CartDto(Long cartId, Long productId, Long optionId, Integer quantity){
+public record CartDto(Long productId, Long optionId, Integer quantity){
     public CartDto {
 
         if (productId == null) {
