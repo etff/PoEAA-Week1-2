@@ -7,6 +7,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
+import java.util.Objects;
+
 import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
@@ -25,27 +27,23 @@ public class LineItem {
     protected LineItem() {
     }
 
-    public LineItem(Long productId, Long optionId, int quantity) {
-        this(null, productId, optionId, quantity);
-    }
-
-    public LineItem(Long id, Long productId, Long optionId, int quantity) {
-        if (productId == null) {
-            throw new IllegalArgumentException("productId is required");
-        }
-
-        if (optionId == null) {
-            throw new IllegalArgumentException("optionId is required");
-        }
-
+    public LineItem(Product product, Long optionId, Integer quantity) {
+        validateOption(product, optionId);
         if (quantity <= 0) {
             throw new IllegalArgumentException("quantity must be greater than 0");
         }
-
-        this.id = id;
-        this.productId = productId;
+        this.productId = product.getId();
         this.optionId = optionId;
         this.quantity = quantity;
+    }
+
+    private void validateOption(Product product, Long optionId) {
+        boolean hasOption = product.getOptions().stream()
+                .filter(Objects::nonNull)
+                .anyMatch(option -> option.getId().equals(optionId));
+        if (!hasOption) {
+            throw new IllegalArgumentException("invalid optionId");
+        }
     }
 
     public void addQuantity(int quantity) {
