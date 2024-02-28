@@ -1,8 +1,8 @@
 package org.example.layered.domain;
+
 import org.junit.jupiter.api.Test;
 
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CartTest {
 
@@ -10,7 +10,9 @@ class CartTest {
     void addLineItem_cartIsEmpty() {
         // Arrange
         Cart cart = new Cart();
-        LineItem lineItem = new LineItem(1L, 1L, 1);
+        Product product1 = new Product(1L, "product1");
+        product1.addOption(new Option(1L));
+        LineItem lineItem = new LineItem(product1, 1L, 1);
 
         // Act
         cart.addProduct(lineItem);
@@ -22,13 +24,20 @@ class CartTest {
 
     @Test
     void addLineItem_cartHasSameProductOption() {
+        // Arrange
         Cart cart = new Cart();
-        LineItem lineItem1 = new LineItem(1L, 1L, 1);
-        LineItem lineItem2 = new LineItem(1L, 1L, 2);
+        Product product1 = new Product(1L, "product1");
+        Product product2 = new Product(1L, "product2");
+        product1.addOption(new Option(1L));
+        product2.addOption(new Option(1L));
+        LineItem lineItem1 = new LineItem(product1, 1L, 1);
+        LineItem lineItem2 = new LineItem(product2, 1L, 2);
 
+        // Act
         cart.addProduct(lineItem1);
         cart.addProduct(lineItem2);
 
+        // Assert
         assertEquals(1, cart.getCartItems().size());
         assertEquals(3, cart.getCartItems().get(0).getQuantity());
     }
