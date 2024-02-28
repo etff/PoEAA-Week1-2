@@ -1,5 +1,8 @@
 package org.example.layered.domain;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,7 +21,9 @@ public class LineItem {
     private Long id;
     private Long productId;
     private Long optionId;
-    private Integer quantity;
+    @Embedded
+    @AttributeOverride(name = "value", column = @Column(name = "quantity"))
+    private Quantity quantity;
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "cart_id", nullable = false)
@@ -29,12 +34,9 @@ public class LineItem {
 
     public LineItem(Product product, Long optionId, Integer quantity) {
         validateOption(product, optionId);
-        if (quantity <= 0) {
-            throw new IllegalArgumentException("quantity must be greater than 0");
-        }
         this.productId = product.getId();
         this.optionId = optionId;
-        this.quantity = quantity;
+        this.quantity = new Quantity(quantity);
     }
 
     private void validateOption(Product product, Long optionId) {
@@ -47,10 +49,7 @@ public class LineItem {
     }
 
     public void addQuantity(int quantity) {
-        if (quantity <= 0) {
-            throw new IllegalArgumentException("quantity must be greater than 0");
-        }
-        this.quantity += quantity;
+        this.quantity = this.quantity.add(quantity);
     }
 
     public void setCartItem(Cart cart) {
@@ -58,7 +57,7 @@ public class LineItem {
     }
 
     public Integer getQuantity() {
-        return quantity;
+        return quantity.getValue();
     }
 
     public boolean hasSameProductOption(LineItem lineItem) {
