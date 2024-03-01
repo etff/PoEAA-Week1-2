@@ -41,7 +41,6 @@ public class AddProductToCartService {
                 .orElseThrow(() -> new IllegalArgumentException("product not found"));
 
         LineItem lineItem = new LineItem(product, optionId, quantity);
-
         cart.addProduct(lineItem);
 
         return cart.getId();
