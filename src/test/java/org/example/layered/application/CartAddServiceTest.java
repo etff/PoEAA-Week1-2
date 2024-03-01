@@ -22,7 +22,7 @@ import static org.mockito.Mockito.when;
 
 
 @ExtendWith(MockitoExtension.class)
-class cartAddServiceTest {
+class CartAddServiceTest {
 
     @Mock
     private CartRepository cartRepository;
