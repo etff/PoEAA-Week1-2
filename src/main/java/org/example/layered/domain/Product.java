@@ -5,9 +5,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,7 +21,8 @@ public class Product {
 
     private String productName;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "product_id")
     private final List<Option> options = new ArrayList<>();
 
     protected Product() {
@@ -30,13 +33,14 @@ public class Product {
         this.productName = productName;
     }
 
-    public Long getId() {
-        return id;
+    public Product(Long id, String productName, Option... options) {
+        this.id = id;
+        this.productName = productName;
+        this.options.addAll(Arrays.asList(options));
     }
 
-    public void addOption(Option option) {
-        options.add(option);
-        option.setProduct(this);
+    public Long getId() {
+        return id;
     }
 
     public List<Option> getOptions() {

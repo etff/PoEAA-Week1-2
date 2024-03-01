@@ -15,10 +15,6 @@ public class Option {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "product_id", nullable = false)
-    private Product product;
-
     protected Option() {
     }
 
@@ -30,7 +26,4 @@ public class Option {
         return id;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
-    }
 }

@@ -9,8 +9,7 @@ class LineItemTest {
     @Test
     void constructor_setsFieldsCorrectly() {
         // Arrange
-        Product product = new Product(1L, "product1");
-        product.addOption(new Option(1L));
+        Product product = new Product(1L, "product1", new Option(1L));
         Long optionId = 1L;
         Integer quantity = 1;
 
@@ -24,8 +23,7 @@ class LineItemTest {
     @Test
     void validateOption_throwsExceptionForInvalidOptionId() {
         // Arrange
-        Product product = new Product(1L, "product1");
-        product.addOption(new Option(1L));
+        Product product = new Product(1L, "product1", new Option(1L));
         Long invalidOptionId = 2L;
 
         // Act and Assert
