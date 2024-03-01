@@ -21,8 +21,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 
 
-@WebMvcTest(CartController.class)
-class CartControllerTest {
+@WebMvcTest(CartLineController.class)
+class CartLineControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
