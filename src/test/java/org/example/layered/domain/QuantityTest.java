@@ -15,7 +15,7 @@ class QuantityTest {
         Quantity quantity = new Quantity(value);
 
         // Assert
-        assertEquals(value, quantity.getValue());
+        assertEquals(value, quantity.value());
     }
 
     @Test
@@ -37,7 +37,7 @@ class QuantityTest {
         Quantity newQuantity = quantity.add(additionalValue);
 
         // Assert
-        assertEquals(3, newQuantity.getValue());
+        assertEquals(3, newQuantity.value());
     }
 
     @Test
@@ -50,7 +50,7 @@ class QuantityTest {
         Quantity newQuantity = quantity.subtract(subtractValue);
 
         // Assert
-        assertEquals(1, newQuantity.getValue());
+        assertEquals(1, newQuantity.value());
     }
 
     @Test

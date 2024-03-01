@@ -57,7 +57,7 @@ public class LineItem {
     }
 
     public Integer getQuantity() {
-        return quantity.getValue();
+        return quantity.value();
     }
 
     public boolean hasSameProductOption(LineItem lineItem) {
