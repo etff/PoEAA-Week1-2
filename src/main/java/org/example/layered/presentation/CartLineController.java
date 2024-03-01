@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.net.URI;
 
 @RestController
-public class CartController {
+public class CartLineController {
     private final AddProductToCartService cartAddService;
 
-    public CartController(AddProductToCartService cartAddService) {
+    public CartLineController(AddProductToCartService cartAddService) {
         this.cartAddService = cartAddService;
     }
 
