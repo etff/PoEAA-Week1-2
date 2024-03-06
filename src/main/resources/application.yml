@@ -16,3 +16,7 @@ spring:
       platform: h2
       schema-locations: classpath:schema.sql
       mode: always
+  data:
+    redis:
+      host: localhost
+      port: 6379
