@@ -10,7 +10,6 @@ public record Quantity(int value) {
             throw new IllegalArgumentException("quantity must be greater than 0");
         }
     }
-
     public Quantity add( int addition) {
         return new Quantity(value + addition);
     }

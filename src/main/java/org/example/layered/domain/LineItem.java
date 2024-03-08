@@ -63,4 +63,12 @@ public class LineItem {
     public boolean hasSameProductOption(LineItem lineItem) {
         return this.productId.equals(lineItem.productId) && this.optionId.equals(lineItem.optionId);
     }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public Long getOptionId() {
+        return optionId;
+    }
 }
