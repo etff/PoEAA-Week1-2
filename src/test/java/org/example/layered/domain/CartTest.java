@@ -17,8 +17,8 @@ class CartTest {
         cart.addProduct(lineItem);
 
         // Assert
-        assertEquals(1, cart.getCartItems().size());
-        assertEquals(lineItem, cart.getCartItems().get(0));
+        assertEquals(1, cart.getLineItems().size());
+        assertEquals(lineItem, cart.getLineItems().get(0));
     }
 
     @Test
@@ -35,7 +35,7 @@ class CartTest {
         cart.addProduct(lineItem2);
 
         // Assert
-        assertEquals(1, cart.getCartItems().size());
-        assertEquals(3, cart.getCartItems().get(0).getQuantity());
+        assertEquals(1, cart.getLineItems().size());
+        assertEquals(3, cart.getLineItems().get(0).getQuantity());
     }
 }

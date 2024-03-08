@@ -33,7 +33,7 @@ public class Cart {
         return id;
     }
 
-    public List<LineItem> getCartItems() {
+    public List<LineItem> getLineItems() {
         return Collections.unmodifiableList(lineItems);
     }
 
