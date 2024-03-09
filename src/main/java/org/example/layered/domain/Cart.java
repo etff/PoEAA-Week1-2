@@ -6,13 +6,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import org.springframework.data.domain.AbstractAggregateRoot;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 @Entity
-public class Cart {
+public class Cart extends AbstractAggregateRoot<Cart> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,5 +51,10 @@ public class Cart {
             }
             setLineItems(lineItem);
         }
+    }
+
+    public Cart publish(){
+        this.registerEvent(new CartPublishedEvent(this));
+        return this;
     }
 }
