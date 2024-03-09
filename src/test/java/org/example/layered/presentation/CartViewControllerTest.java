@@ -1,6 +1,6 @@
 package org.example.layered.presentation;
 
-import org.example.layered.query.CartViewListService;
+import org.example.layered.query.CartDtoFetcher;
 import org.example.layered.query.dto.CartLineView;
 import org.example.layered.query.dto.CartView;
 import org.junit.jupiter.api.Test;
@@ -24,13 +24,13 @@ class CartViewControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private CartViewListService cartViewListService;
+    private CartDtoFetcher cartDtoFetcher;
 
     @Test
     void list() throws Exception {
         // Arrange
         CartView cartView = new CartView(1L, List.of(new CartLineView(1L, 2L, 3)));
-        when(cartViewListService.findById(anyLong())).thenReturn(cartView);
+        when(cartDtoFetcher.getCartView(anyLong())).thenReturn(cartView);
 
         // Act & Assert
         mockMvc.perform(get("/carts/1"))
