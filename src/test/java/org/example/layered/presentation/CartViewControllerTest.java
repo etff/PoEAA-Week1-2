@@ -33,7 +33,7 @@ class CartViewControllerTest {
         when(cartDtoFetcher.getCartView(anyLong())).thenReturn(cartView);
 
         // Act & Assert
-        mockMvc.perform(get("/carts/1"))
+        mockMvc.perform(get("/carts?id=1"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
     }
