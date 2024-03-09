@@ -4,7 +4,6 @@ import org.example.layered.domain.Cart;
 import org.example.layered.domain.LineItem;
 import org.example.layered.domain.Option;
 import org.example.layered.domain.Product;
-import org.example.layered.infra.CartRedisRepository;
 import org.example.layered.infra.CartRepository;
 import org.example.layered.infra.ProductRepository;
 import org.junit.jupiter.api.Test;
@@ -30,9 +29,6 @@ class CartAddServiceTest {
 
     @Mock
     private ProductRepository productRepository;
-
-    @Mock
-    private CartRedisRepository cartRedisRepository;
 
     @InjectMocks
     private AddProductToCartService cartAddService;
