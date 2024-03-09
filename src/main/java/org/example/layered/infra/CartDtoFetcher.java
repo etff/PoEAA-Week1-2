@@ -1,15 +1,15 @@
 package org.example.layered.infra;
 
-import org.example.layered.query.CartDtoFetcher;
+import org.example.layered.query.CartFetcher;
 import org.example.layered.query.dto.CartView;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CartDtoFetcherImpl implements CartDtoFetcher {
+public class CartDtoFetcher implements CartFetcher {
 
     private final CartRedisRepository cartRedisRepository;
 
-    public CartDtoFetcherImpl(CartRedisRepository cartRedisRepository) {
+    public CartDtoFetcher(CartRedisRepository cartRedisRepository) {
         this.cartRedisRepository = cartRedisRepository;
     }
 
