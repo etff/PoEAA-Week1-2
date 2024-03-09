@@ -28,8 +28,7 @@ public class AddProductToCartService {
         LineItem lineItem = new LineItem(product, optionId, quantity);
         cart.addProduct(lineItem);
 
-        Cart savedCart = cartRepository.save(cart);
-        savedCart.publish();
+        Cart savedCart = cartRepository.save(cart.publish());
 
         return savedCart.getId();
     }
